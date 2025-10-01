@@ -5,16 +5,13 @@ module.exports = {
   ],
   theme: {
     extend: {
-      // Your existing custom colors
       colors: {
-        'brand-primary': '#2c3e50',      // A modern, dark slate blue
-        'brand-secondary': '#ecf0f1',    // A clean, soft off-white
-        'brand-accent': '#e74c3c',       // A vibrant, eye-catching red
-        'brand-accent-hover': '#c0392b', // A darker red for hover effects
-        'brand-text': '#34495e',         // A dark gray for readable text
+        'brand-primary': '#2c3e50',
+        'brand-secondary': '#ecf0f1',
+        'brand-accent': '#e74c3c',
+        'brand-accent-hover': '#c0392b',
+        'brand-text': '#34495e',
       },
-
-      // NEW: Animations and Keyframes for the login page
       animation: {
         'fade-in-down': 'fadeInDown 0.5s ease-in-out',
         'fade-in-up': 'fadeInUp 0.5s ease-in-out',

@@ -1,10 +1,3 @@
-/* We can remove the default App styles as Tailwind CSS handles everything now. */
+@import "tailwindcss";
 
-/* Add this for the smooth slide-down mega menu animation */
-.mega-menu {
-  transition-property: opacity, transform, visibility;
-}
-
-.mega-menu.invisible {
-  visibility: hidden;
-}
+/* Your custom styles can go below */
