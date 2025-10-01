@@ -19,7 +19,7 @@ const CATEGORIES = [
 ];
 
 // --- MEGAMENU COMPONENT (Now serves as Desktop MegaMenu AND Mobile Full Menu) ---
-const MegaMenu = ({ isOpen, isMobile, setMenuOpen }) => {
+const MegaMenu = ({ isOpen, isMobile, setMenuOpen, user, logout }) => { // Added user, logout props
     // Desktop MegaMenu classes (appears below header, full width, hides on small screens)
     const desktopClasses = !isMobile 
         ? (isOpen 
@@ -86,11 +86,24 @@ const MegaMenu = ({ isOpen, isMobile, setMenuOpen }) => {
                     ))}
                 </div>
 
-                {/* Additional Mobile Navigation (Home, Auth links, etc.) */}
+                {/* Additional Mobile Navigation & Auth Links (Visible on small screens) */}
                 {isMobile && (
                     <div className="mt-8 pt-4 border-t space-y-4">
                         <Link to="/" onClick={handleLinkClick} className="block text-lg font-medium text-brand-text hover:text-brand-accent">Home</Link>
-                        {/* You can add Login/Logout links here for easy mobile access if desired */}
+                        
+                        {/* --- AUTHENTICATION LINKS (FIX for Mobile) --- */}
+                        {user ? (
+                            <>
+                                <Link to="/orders" onClick={handleLinkClick} className="block text-lg font-medium text-brand-text hover:text-brand-accent">My Orders</Link>
+                                <button onClick={() => { logout(); handleLinkClick(); }} className="w-full text-left text-lg font-medium text-red-500 hover:text-red-700 transition">Logout ({user.name})</button>
+                            </>
+                        ) : (
+                            <>
+                                <Link to="/login" onClick={handleLinkClick} className="block text-lg font-medium text-brand-text hover:text-brand-accent">Login</Link>
+                                <Link to="/signup" onClick={handleLinkClick} className="block text-lg font-medium bg-brand-primary text-white py-2 px-4 rounded-lg text-center hover:bg-opacity-90 transition">Sign Up</Link>
+                            </>
+                        )}
+                        {/* --- END AUTH FIX --- */}
                     </div>
                 )}
             </div>
@@ -184,10 +197,10 @@ const Header = () => {
             </header>
             
             {/* Renders the MegaMenu for Desktop (hover) */}
-            <MegaMenu isOpen={isDesktopMenuOpen} isMobile={false} setMenuOpen={setDesktopMenuOpen} />
+            <MegaMenu isOpen={isDesktopMenuOpen} isMobile={false} setMenuOpen={setDesktopMenuOpen} user={user} logout={logout} />
             
             {/* Renders the MegaMenu logic as a full-screen Mobile Nav (click) */}
-            <MegaMenu isOpen={isMobileMenuOpen} isMobile={true} setMenuOpen={setMobileMenuOpen} />
+            <MegaMenu isOpen={isMobileMenuOpen} isMobile={true} setMenuOpen={setMobileMenuOpen} user={user} logout={logout} />
         </div>
     );
 };
